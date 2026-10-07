@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BimbelALC - Tes Uji</title>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: #eff6ff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.5;
+        }
+
+        header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Logo Styling */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+        }
+
+        .brand-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .brand-badge {
+            font-size: 11px;
+            background-color: #fef3c7;
+            color: #d97706;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-left: 6px;
+            border: 1px solid #fde68a;
+        }
+
+        /* Dropdown Navigation */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            background-color: #f1f5f9;
+            color: var(--text-main);
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid transparent;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-btn:hover {
+            background-color: #e2e8f0;
+        }
+
+        .arrow-icon {
+            font-size: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            margin-top: 8px;
+            background-color: var(--bg-card);
+            min-width: 220px;
+            box-shadow: var(--shadow-lg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            z-index: 50;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 14px;
+            gap: 12px;
+            transition: background 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+        }
+
+        .badge-tag {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .badge-mtk { background-color: #dbeafe; color: #1d4ed8; }
+        .badge-big { background-color: #fef3c7; color: #b45309; }
+        .badge-bin { background-color: #d1fae5; color: #047857; }
+
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 32px 20px;
+        }
+
+        /* Banner Home */
+        .welcome-banner {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: #ffffff;
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 32px;
+        }
+
+        .welcome-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .welcome-banner h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .welcome-banner p {
+            font-size: 16px;
+            color: #dbeafe;
+            max-width: 600px;
+            margin-bottom: 24px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-subject {
+            background-color: #ffffff;
+            color: var(--primary-color);
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .btn-subject:hover {
+            transform: translateY(-2px);
+            background-color: #f8fafc;
+        }
+
+        /* Subject View & Cards */
+        .subject-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .subject-subtitle {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .subject-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .btn-back {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .btn-back:hover {
+            background-color: #f1f5f9;
+            color: var(--text-main);
+        }
+
+        /* Grid for Sub-chapters */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .card-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .btn-card {
+            width: 100%;
+            background-color: #f1f5f9;
+            color: var(--text-main);
+            border: none;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .btn-card:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .modal-box {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-xl);
+            width: 100%;
+            max-width: 800px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            background-color: #f8fafc;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .modal-badge {
+            background-color: #dbeafe;
+            color: #1e40af;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .modal-close:hover {
+            background-color: #e2e8f0;
+            color: var(--text-main);
+        }
+
+        .modal-body {
+            padding: 24px;
+            overflow-y: auto;
+            flex: 1;
+            font-size: 15px;
+            color: var(--text-main);
+        }
+
+        .modal-footer {
+            padding: 16px 24px;
+            background-color: #f8fafc;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-close-footer {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+        }
+
+        .btn-close-footer:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Material Content Styling */
+        .content-box {
+            background-color: #eff6ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 16px;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin-bottom: 16px;
+        }
+
+        .formula-box {
+            background-color: #f1f5f9;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-family: monospace;
+            font-size: 18px;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            margin: 16px 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 24px 20px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hidden { display: none !important; }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 640px) {
+            .welcome-banner h1 { font-size: 24px; }
+            .subject-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .grid-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / NAVBAR -->
+    <header>
+        <div class="header-container">
+            
+            <!-- Logo & Nama Bimbel -->
+            <a class="logo-container" onclick="showHome()">
+                <div class="logo-icon">🎓</div>
+                <div style="display: flex; align-items: center;">
+                    <span class="brand-name">Bimbel ALC</span>
+                    <span class="brand-badge">EduTech</span>
+                </div>
+            </a>
+
+            <!-- Dropdown Menu -->
+            <div class="dropdown">
+                <button class="dropdown-btn" onclick="toggleDropdown(event)">
+                    <span>📖</span>
+                    <span id="dropdown-label">Mata Pelajaran</span>
+                    <span class="arrow-icon" id="dropdown-arrow">▼</span>
+                </button>
+
+                <!-- Isi Menu Dropdown -->
+                <div class="dropdown-menu" id="dropdown-menu">
+                    <a href="#" class="dropdown-item" onclick="selectSubject('matematika')">
+                        <span class="badge-tag badge-mtk">MTK</span>
+                        <span>Matematika</span>
+                    </a>
+                    <a href="#" class="dropdown-item" onclick="selectSubject('inggris')">
+                        <span class="badge-tag badge-big">BIG</span>
+                        <span>Bahasa Inggris</span>
+                    </a>
+                    <a href="#" class="dropdown-item" onclick="selectSubject('indonesia')">
+                        <span class="badge-tag badge-bin">BIN</span>
+                        <span>Bahasa Indonesia</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <!-- Welcome Banner (Home) -->
+        <section id="welcome-view" class="welcome-banner">
+            <span class="welcome-tag">✨ Selamat Datang di Bimbel ALC</span>
+            <h1>Uji Kemampuanmu dengan Simulasi Tes</h1>
+            <p>Pilih Mata Pelajaran di dropdown atas untuk melihat daftar sub bab materi pelajaran dan mulai simulasi tes secara mandiri.</p>
+            <div class="btn-group">
+                <button class="btn-subject" onclick="selectSubject('matematika')">Matematika</button>
+                <button class="btn-subject" onclick="selectSubject('inggris')">Bahasa Inggris</button>
+                <button class="btn-subject" onclick="selectSubject('indonesia')">Bahasa Indonesia</button>
+            </div>
+        </section>
+
+        <!-- Dynamic Subject View (Tampilan Sub Bab) -->
+        <section id="subject-view" class="hidden">
+            <div class="subject-header">
+                <div>
+                    <span class="subject-subtitle" id="subject-badge">MATA PELAJARAN</span>
+                    <h2 class="subject-title" id="subject-title">Nama Mapel</h2>
+                </div>
+                <button class="btn-back" onclick="showHome()">← Kembali ke Beranda</button>
+            </div>
+
+            <!-- Grid Kartu Sub Bab -->
+            <div class="grid-container" id="subchapters-container">
+                <!-- Elemen sub bab di-inject via JavaScript -->
+            </div>
+        </section>
+
+        <!-- DIV Detail Materi (Tampil saat link/tombol sub bab diklik) -->
+        <div id="content-modal" class="modal-overlay">
+            <div class="modal-box">
+                
+                <!-- Header Modal -->
+                <div class="modal-header">
+                    <div class="modal-header-left">
+                        <span id="modal-category" class="modal-badge">Mapel</span>
+                        <h3 id="modal-title" class="modal-title">Judul Sub Bab</h3>
+                    </div>
+                    <button class="modal-close" onclick="closeModal()">&times;</button>
+                </div>
+
+                <!-- Body Modal (Isi Detail Materi Dinamis) -->
+                <div class="modal-body" id="modal-body">
+                    <!-- Materi pelajaran dimuat di sini secara dinamis -->
+                </div>
+
+                <!-- Footer Modal -->
+                <div class="modal-footer">
+                    <span style="font-size: 12px; color: var(--text-muted);">Modul Pembelajaran BimbelKu</span>
+                    <button class="btn-close-footer" onclick="closeModal()">Selesai Membaca</button>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        &copy; 2026 <strong style="color: var(--primary-color);">Bimbel ALC</strong>. Hak Cipta Dilindungi. Platform Belajar Interaktif.
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Data Struktur untuk Mata Pelajaran & Sub Bab
+        const subjectsData = {
+            matematika: {
+                title: "Matematika",
+                badge: "SAINTEK / UMUM",
+                icon: "📐",
+                subchapters: [
+                    {
+                        id: "mtk-91.A",
+                        title: "91. SPLDV uji 1",
+                        desc: "Sistem Persamaan Linear Dua Variabel (SPLDV)",
+                        link: "01SPLDV/1/index.html"
+                    },
+                    {
+                        id: "mtk-91.B",
+                        title: "91. SPLDV uji 2",
+                        desc: "Sistem Persamaan Linear Dua Variabel (SPLDV)",
+                        link: "01SPLDV/2/index.html"
+                    },
+                    {
+                        id: "mtk-92.A",
+                        title: "92. Bangun Ruang Sisi Datar uji 1",
+                        desc: "Bangun Ruang Sisi Datar.",
+                        link: "02BangunRuangSisiDatar/1/index.html"
+                    },
+                    {
+                        id: "mtk-92.B",
+                        title: "92. Bangun Ruang Sisi Datar uji 2",
+                        desc: "Bangun Ruang Sisi Datar.",
+                        link: "02BangunRuangSisiDatar/2/index.html"
+                    }
+                ]
+            },
+            inggris: {
+                title: "Bahasa Inggris",
+                badge: "LANGUAGE & LITERACY",
+                icon: "🔤",
+                subchapters: [
+                    {
+                        id: "big-1",
+                        title: "1. Tenses Mastery",
+                        desc: "Learn Simple Present, Past Tense, and Present Perfect Tense with easy examples."
+                    },
+                    {
+                        id: "big-2",
+                        title: "2. Passive Voice",
+                        desc: "Cara mengonversi kalimat aktif menjadi pasif dalam tulisan formal dan akademis."
+                    },
+                    {
+                        id: "big-3",
+                        title: "3. Reading Comprehension",
+                        desc: "Teknik membaca cepat (Skimming & Scanning) untuk menemukan ide utama paragraf."
+                    }
+                ]
+            },
+            indonesia: {
+                title: "Bahasa Indonesia",
+                badge: "LITERASI & BAHASA",
+                icon: "📚",
+                subchapters: [
+                    {
+                        id: "bin-1",
+                        title: "1. Teks Laporan Hasil Observasi (LHO)",
+                        desc: "Struktur LHO (Definisi Umum, Deskripsi Bagian, Manfaat) dan kebahasaannya."
+                    },
+                    {
+                        id: "bin-2",
+                        title: "2. Teks Eksplanasi",
+                        desc: "Menganalisis fenomena alam dan sosial berdasarkan urutan sebab-akibat."
+                    },
+                    {
+                        id: "bin-3",
+                        title: "3. Kalimat Efektif & PUEBI/EYD",
+                        desc: "Aturan penulisan ejaan, tanda baca, serta kaidah pembuatan kalimat yang jelas."
+                    }
+                ]
+            }
+        };
+
+        // Buka / Tutup Dropdown Menu
+        function toggleDropdown(event) {
+            event.stopPropagation();
+            const menu = document.getElementById('dropdown-menu');
+            const arrow = document.getElementById('dropdown-arrow');
+            
+            const isOpen = menu.classList.contains('show');
+            if (isOpen) {
+                menu.classList.remove('show');
+                arrow.style.transform = 'rotate(0deg)';
+            } else {
+                menu.classList.add('show');
+                arrow.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Tutup dropdown jika klik di luar
+        window.onclick = function() {
+            const menu = document.getElementById('dropdown-menu');
+            const arrow = document.getElementById('dropdown-arrow');
+            menu.classList.remove('show');
+            arrow.style.transform = 'rotate(0deg)';
+        }
+
+        // Tampilkan Tampilan Beranda
+        function showHome() {
+            document.getElementById('welcome-view').classList.remove('hidden');
+            document.getElementById('subject-view').classList.add('hidden');
+            document.getElementById('dropdown-label').innerText = 'Mata Pelajaran';
+        }
+
+        // Tampilkan Pelajaran dan Daftar Sub Bab
+        function selectSubject(key) {
+            const subject = subjectsData[key];
+            if (!subject) return;
+
+            // Update Label Dropdown
+            document.getElementById('dropdown-label').innerText = subject.title;
+
+            // Pindah Tampilan View
+            document.getElementById('welcome-view').classList.add('hidden');
+            document.getElementById('subject-view').classList.remove('hidden');
+
+            // Render Info Mapel
+            document.getElementById('subject-title').innerText = subject.title;
+            document.getElementById('subject-badge').innerText = subject.badge;
+
+            // Render Kartu Sub Bab
+            const container = document.getElementById('subchapters-container');
+            container.innerHTML = '';
+
+            subject.subchapters.forEach((sub) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div>
+                        <div class="card-icon" style="background-color: #eff6ff;">${subject.icon}</div>
+                        <h3 class="card-title">${sub.title}</h3>
+                        <p class="card-desc">${sub.desc}</p>
+                    </div>
+                    <button class="btn-card" onclick="openModal('${key}', '${sub.id}')">
+                        Buka Simulasi Tes &rarr;
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Buka Modal / DIV Detail Materi
+        function openModal(subjectKey, subId) {
+            const subject = subjectsData[subjectKey];
+            if (!subject) return;
+
+            const sub = subject.subchapters.find(s => s.id === subId);
+            if (!sub) return;
+
+            document.getElementById('modal-category').innerText = subject.title;
+            document.getElementById('modal-title').innerText = sub.title;
+            //document.getElementById('modal-body').innerHTML = sub.content;
+
+            //const modal = document.getElementById('content-modal');
+            //modal.classList.add('active');
+            //document.body.style.overflow = 'hidden'; // Matikan scroll background
+			
+			window.location.href = sub.link;
+
+        }
+
+        // Tutup Modal
+        function closeModal() {
+            const modal = document.getElementById('content-modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Aktifkan kembali scroll
+        }
+    </script>
+</body>
+</html>
