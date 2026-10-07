@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Tes Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Tampilan Layar Mulai -->
+        <div id="start-screen" class="screen active">
+			<a href="../../index.html" class="btn btn-home">Beranda</a>
+            <h1>Selamat Datang di Tes Online</h1>
+            <p>Jumlah Soal: 26 Soal</p>
+            <button id="btn-start" class="btn btn-primary">Mulai Tes</button>
+        </div>
+
+        <!-- Tampilan Layar Soal -->
+        <div id="quiz-screen" class="screen">
+            <div class="quiz-header">
+                <span id="question-number">Soal 1 dari 26</span>
+                <div class="header-buttons">
+                    <a href="../../index.html" class="btn btn-home">Beranda</a>
+                    <button id="btn-menu" class="btn btn-secondary">Menu Soal</button>
+                </div>
+            </div>
+
+            <!-- Gambar Soal (Ukuran 280x330 px) -->
+            <div class="image-container">
+                <img id="question-image" src="" alt="Soal" width="280" height="330">
+            </div>
+
+            <!-- Pilihan Jawaban -->
+            <div class="options-container">
+                <label class="option-label">
+                    <input type="radio" name="answer" value="A"> A
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="answer" value="B"> B
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="answer" value="C"> C
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="answer" value="D"> D
+                </label>
+            </div>
+
+            <!-- Tombol Navigasi -->
+            <div class="navigation-buttons">
+                <button id="btn-prev" class="btn btn-secondary" disabled>Prev</button>
+                <button id="btn-next" class="btn btn-primary">Next</button>
+                <button id="btn-submit" class="btn btn-danger hidden">Kumpulkan</button>
+            </div>
+        </div>
+
+        <!-- Tampilan Layar Hasil -->
+        <div id="result-screen" class="screen">
+            <h2>Hasil Tes Anda</h2>
+            <div id="score-display" class="score">0</div>
+            <h3>Rincian Jawaban:</h3>
+            <div id="result-grid" class="result-grid"></div>
+            <div class="result-actions">
+                <button id="btn-restart" class="btn btn-primary" onclick="location.reload()">Ulangi Tes</button>
+                <a href="../../index.html" class="btn btn-home">Beranda</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Pop-up Navigation Menu -->
+    <div id="navigation-modal" class="modal">
+        <div class="modal-content">
+            <span id="btn-close-modal" class="close">&times;</span>
+            <h3>Pilih Nomor Soal</h3>
+            <div id="modal-grid" class="modal-grid"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
